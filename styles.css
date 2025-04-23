@@ -1,0 +1,443 @@
+/* 
+  Tried to make this look like a Material Design website.
+  Should include all the CSS features for Lab 3
+
+  Note that this was a pretty incremental process and
+  I don't think every style actually got used in the HTML -
+  many were likely overwritten as I added the required
+  features.
+*/
+
+/* CSS Variables with fallbacks */
+:root {
+    --primary-color: #1976d2;
+    --secondary-color: #03a9f4;
+    --accent-color: #ff4081;
+    --text-color: #212121;
+    --light-text: #757575;
+    --background-color: #f5f5f5;
+    --card-color: #ffffff;
+    --header-font: 'Roboto', sans-serif;
+    --body-font: 'Open Sans', sans-serif;
+    --spacing-unit: 8px;
+    --border-radius: 4px;
+}
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@400;500;700&display=swap');
+
+/* Zero out the margin to make organizing easier */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Styles for the document as a whole, unless overridden */
+body {
+    font-family: var(--body-font, 'Open Sans');
+    color: var(--text-color, #212121);
+    background-color: var(--background-color, #f5f5f5);
+    line-height: 1.6;
+    padding: 2rem;
+}
+
+/* :has */
+section:has(h1) {
+    margin-top: 3rem;
+    border-top: 3px solid var(--accent-color);
+}
+
+/* navbar */
+nav {
+    background-color: var(--primary-color);
+    padding: 1rem;
+    position: sticky;
+    /* Keep the navbar at the top */
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* All ul ever under a nav */
+nav ul {
+    display: flex;
+    list-style-type: none;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+/* Only the li for unordered lists at the top level of the navbar */
+nav>ul>li {
+    margin-right: 1.5em;
+}
+
+/* Link styling */
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    transition: background-color 0.2s ease;
+}
+
+nav a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+nav a:active {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Main content */
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+}
+
+/* Needed wider-gamut color so: */
+main a {
+    color: color(display-p3 0 0.6 1);
+    text-decoration: underline;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+main a:hover {
+    color: color(display-p3 0.2 0.7 1 / 0.9);
+    text-decoration-thickness: 2px;
+}
+
+/* Sections, as columns with flex */
+section {
+    margin-bottom: 3rem;
+    background-color: var(--card-color);
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Headers */
+h1,
+h2,
+h3 {
+    font-family: var(--header-font, 'Roboto');
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+h2 {
+    font-size: 1.8rem;
+    margin-top: 1.5rem;
+}
+
+h3 {
+    font-size: 1.4rem;
+    margin-top: 1rem;
+    color: var(--secondary-color);
+}
+
+/* Needed at least one ID selector, so here it is */
+#feedback-options {
+    margin-top: 1rem;
+}
+
+/* Div styling (I only used them for titles) */
+div {
+    margin: 15px 0 15px 0;
+    padding: 10px 15px 10px 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    background-color: hsla(210, 50%, 98%, 0.5);
+}
+
+/* strong within div (also just titles) */
+div strong {
+    color: var(--primary-color);
+    font-size: 1.1em;
+}
+
+/* Grid works well with the lists */
+ul,
+ol {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding-left: 2rem;
+    margin-bottom: 1.5rem;
+    grid-auto-flow: dense;
+    grid-auto-columns: 1fr;
+}
+
+/* GSC */
+h2~p {
+    margin-bottom: 1rem;
+    color: var(--light-text);
+}
+
+/* ASC */
+h2+p {
+    font-weight: 500;
+    color: color-mix(in srgb, var(--primary-color) 20%, var(--text-color));
+}
+
+/* element.name */
+p.date {
+    font-style: italic;
+    color: var(--light-text);
+    border-bottom: 1px dotted var(--secondary-color);
+}
+
+/* more title styling */
+strong {
+    margin-top: 10px;
+    margin-right: 0;
+    margin-bottom: 10px;
+    margin-left: 0;
+    display: inline-block;
+    background-color: rgb(245, 245, 245);
+    padding-top: 5px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    border-top: 2px solid var(--primary-color);
+    border-right: 2px solid var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+    border-left: 2px solid var(--primary-color);
+    border-radius: 4px;
+}
+
+/* style the controls a bit */
+[controls] {
+    width: 100%;
+    margin-bottom: 1rem;
+    border: none;
+    border-radius: 4px;
+    overflow: hidden;
+    background-color: #f0f0f0;
+}
+
+/* Make the media look nicer */
+img,
+video,
+audio {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    margin: auto;
+}
+
+/* Styling for emphasis */
+em {
+    color: #d81b60;
+    font-style: italic;
+}
+
+b {
+    color: var(--primary-color);
+}
+
+/* Details and summary */
+details {
+    margin: 1.5rem 0;
+    border: 1px solid #e0e0e0;
+    border-radius: var(--border-radius);
+    padding: 0.8rem;
+    background-color: #ffffff;
+}
+
+summary {
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0.5rem;
+    color: var(--secondary-color);
+}
+
+details[open] summary {
+    margin-bottom: 0.8rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* Form styling */
+form {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+fieldset {
+    border: 1px solid #e0e0e0;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+input,
+select,
+textarea {
+    padding: 0.8rem;
+    border: 1px solid #e0e0e0;
+    border-radius: var(--border-radius);
+    font-family: var(--body-font);
+    font-size: 1rem;
+    transition: border-color 0.2s;
+    border-style: solid;
+    border-width: 1px;
+}
+
+input[type="text"],
+textarea,
+select {
+    width: 100%;
+    min-width: 20em;
+}
+
+input[type="text"]:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--secondary-color);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(3, 169, 244, 0.2);
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    margin-right: 0.5rem;
+    cursor: pointer;
+}
+
+button {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.8rem 1.5rem 0.8rem 1.5rem;
+    border: none;
+    border-radius: var(--border-radius);
+    font-family: var(--header-font);
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    min-height: 44px;
+}
+
+button:hover {
+    background-color: #1565c0;
+}
+
+/* Separator */
+hr {
+    height: 2px;
+    background-color: #e0e0e0;
+    border: none;
+    margin: 20px 0;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 3rem;
+    padding: 1.5rem;
+    background-color: var(--primary-color);
+    color: white;
+    position: relative;
+}
+
+footer h6 {
+    font-size: 0.9rem;
+    font-weight: normal;
+    text-indent: 2mm;
+}
+
+h1 {
+    letter-spacing: 0.5pt;
+}
+
+header {
+    margin-bottom: 0.5cm;
+}
+
+/* Selector List */
+audio,
+video {
+    display: block;
+    margin: 1em auto;
+}
+
+/* Nested Selectors */
+@media (min-width: 768px) {
+    section {
+        & header {
+            margin-bottom: 2rem;
+        }
+
+        & img {
+            max-width: 80%;
+            margin: 2rem auto;
+            display: block;
+        }
+    }
+}
+
+/* Make the website look decent on mobile */
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    section {
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .attendance-list li {
+        display: block;
+    }
+
+    .agenda-items li {
+        display: inline-block;
+        margin-right: 1rem;
+    }
+}
+
+/* More stuff was breaking in the tiny preview window */
+@media (max-width: 480px) {
+    body {
+        padding: 0.5rem;
+    }
+
+    section {
+        padding: 1rem;
+    }
+
+    form {
+        gap: 1rem;
+    }
+
+    fieldset {
+        padding: 0.8rem;
+    }
+
+    nav a {
+        display: inline;
+    }
+}
